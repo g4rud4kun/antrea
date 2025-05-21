@@ -1,0 +1,25 @@
+apiVersion: crd.antrea.io/v1alpha1
+kind: PacketCapture
+metadata:
+  name: pc-from-toolbox
+spec:
+  timeout: 300
+  captureConfig:
+    firstN:
+      number: 5
+  source:
+    pod:
+      namespace: lfx-mentorship
+      name: antrea-toolbox-deployment-f6bbf776c-bdzbf
+  destination:
+    ip: 8.8.8.8
+  direction: SourceToDestination
+  packet:
+    ipFamily: IPv4
+    protocol: TCP
+    transportHeader:
+      tcp:
+        dstPort: 53
+        flags:
+          - value: 0x2
+          
